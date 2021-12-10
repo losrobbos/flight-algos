@@ -39,16 +39,28 @@ const getGeoDataTest = async () => {
     "Moscow, Russia" 
   ]
 
+  const flights = []
+
   // outer loop
   for(let i=0; i<arrAirports.length; i++) {
 
     // combine with every other airport
     for(let j=i+1; j<arrAirports.length; j++) {
       const distance = await getGeoData( arrAirports[i], arrAirports[j]  )
-      console.log( `${arrAirports[i]} - ${arrAirports[j]} - ${Math.round(distance/1000)}` )
+      // console.log( `Hin: ${arrAirports[i]} - ${arrAirports[j]} - ${Math.round(distance/1000)}` )
+      // console.log( `Zurueck: ${arrAirports[j]} - ${arrAirports[i]} - ${Math.round(distance/1000)}` )
+
+      // next for loop for a bunch of flights
+      const amountFlights = 1
+      for(let x=0; x < amountFlights ;x++) {
+        flights.push({ from: arrAirports[i], to: arrAirports[j], distance })
+        flights.push({ from: arrAirports[j], to: arrAirports[i], distance })
+      }
     }
 
   }
+
+  console.log(flights)
 
 
 }
